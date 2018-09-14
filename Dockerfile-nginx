@@ -1,0 +1,9 @@
+FROM nginx:alpine
+
+WORKDIR /app
+
+COPY configs/default.conf /etc/nginx/conf.d/default.conf
+
+COPY src/public public
+
+EXPOSE 80
