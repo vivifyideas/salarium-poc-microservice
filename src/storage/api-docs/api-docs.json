@@ -1,0 +1,42 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Salarium POC Microservice",
+        "description": "Microservice to demonstrate AWS Infrastructure on POC",
+        "termsOfService": "",
+        "contact": {
+            "email": "contact@vivifyideas.com"
+        },
+        "license": {
+            "name": "Private License",
+            "url": "URL to the license"
+        },
+        "version": "1.0.0"
+    },
+    "basePath": "/",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "Status"
+                ],
+                "summary": "Get current status and version of microservice",
+                "description": "Returns object with status and version",
+                "operationId": "getStatus",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "500": {
+                        "description": "Server side error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
