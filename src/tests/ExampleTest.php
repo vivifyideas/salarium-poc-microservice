@@ -14,8 +14,13 @@ class ExampleTest extends TestCase
     {
         $this->get('/');
 
+        $expected = [
+            'status' => 'OK',
+            'version' => $this->app->version()
+        ];
+
         $this->assertEquals(
-            $this->app->version(), $this->response->getContent()
+            json_encode($expected), $this->response->getContent()
         );
     }
 }
