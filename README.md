@@ -1,0 +1,1 @@
+Build status : ![badge-status](https://codebuild.eu-central-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiRERiVWR1Y1dNazV3YWpYcW9XSUpSTGw3NVcwaUh3R3FnZ3pyNEE3M3U3TkJQNjNydXRIazJESlp4YnduZExIOWtScVBMKzRIYTBPT0dnYVBHQVVXbHFBPSIsIml2UGFyYW1ldGVyU3BlYyI6IkFZVFJGL0MrQXRrL3NlT0oiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
