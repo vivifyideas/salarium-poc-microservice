@@ -5,16 +5,18 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region eu-central-1)
-      - docker pull $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG || true
-      - docker pull $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE2_REPO_NAME:$IMAGE_TAG || true
+      - docker pull $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE_REPO_NAME || true
+      - docker pull $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE2_REPO_NAME || true
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build --cache-from $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG -t $IMAGE_REPO_NAME:$IMAGE_TAG -f $DOCKERFILE .
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - docker build --cache-from $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE2_REPO_NAME:$IMAGE_TAG -t $IMAGE2_REPO_NAME:$IMAGE_TAG -f $DOCKERFILE2 .
-      - docker tag $IMAGE2_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE2_REPO_NAME:$IMAGE_TAG
+      - docker build --cache-from $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE_REPO_NAME -t $IMAGE_REPO_NAME -f $DOCKERFILE .
+      - docker tag $IMAGE_REPO_NAME:$LOCAL_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker build --cache-from $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE2_REPO_NAME -t $IMAGE2_REPO_NAME -f $DOCKERFILE2 .
+      - docker tag $IMAGE2_REPO_NAME:$LOCAL_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE2_REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
