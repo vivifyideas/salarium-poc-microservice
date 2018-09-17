@@ -23,7 +23,6 @@ phases:
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE2_REPO_NAME:$IMAGE_TAG
-      - printf '[{"name":"salarium-poc-web-php-fpm","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG > imagedefinitions.json
-      - printf '[{"name":"salarium-poc-web-nginx","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE2_REPO_NAME:$IMAGE_TAG >> imagedefinitions.json
+      - printf '[{"name":"salarium-poc-web-php-fpm","imageUri":"%s"}, {"name":"salarium-poc-web-nginx","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/$IMAGE2_REPO_NAME:$IMAGE_TAG > imagedefinitions.json
 artifacts:
   files: imagedefinitions.json
