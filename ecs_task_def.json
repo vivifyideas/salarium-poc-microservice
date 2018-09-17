@@ -1,0 +1,98 @@
+{
+    "taskDefinition": {
+        "status": "ACTIVE",
+        "memory": "1024",
+        "networkMode": "awsvpc",
+        "family": "salarium-poc-web-nginx-phpfpm",
+        "placementConstraints": [],
+        "requiresAttributes": [{
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+            },
+            {
+                "name": "ecs.capability.execution-role-ecr-pull"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+            },
+            {
+                "name": "ecs.capability.task-eni"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.ecr-auth"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.task-iam-role"
+            },
+            {
+                "name": "ecs.capability.execution-role-awslogs"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+            }
+        ],
+        "cpu": "512",
+        "executionRoleArn": "arn:aws:iam::813800257188:role/ecsTaskExecutionRole",
+        "compatibilities": [
+            "EC2",
+            "FARGATE"
+        ],
+        "volumes": [],
+        "requiresCompatibilities": [
+            "FARGATE"
+        ],
+        "taskRoleArn": "arn:aws:iam::813800257188:role/ecsTaskExecutionRole",
+        "taskDefinitionArn": "arn:aws:ecs:eu-central-1:813800257188:task-definition/salarium-poc-web-nginx-phpfpm:8",
+        "containerDefinitions": [{
+                "environment": [],
+                "name": "salarium-poc-web-nginx",
+                "links": [],
+                "mountPoints": [],
+                "image": "813800257188.dkr.ecr.eu-central-1.amazonaws.com/salarium-poc-lumen-nginx:latest",
+                "cpu": 0,
+                "portMappings": [{
+                    "protocol": "tcp",
+                    "containerPort": 80,
+                    "hostPort": 80
+                }],
+                "dnsServers": [],
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {
+                        "awslogs-region": "eu-central-1",
+                        "awslogs-stream-prefix": "ecs",
+                        "awslogs-group": "/ecs/salarium-poc-web-nginx-phpfpm"
+                    }
+                },
+                "essential": true,
+                "volumesFrom": []
+            },
+            {
+                "environment": [],
+                "name": "salarium-poc-web-php-fpm",
+                "links": [],
+                "mountPoints": [],
+                "image": "813800257188.dkr.ecr.eu-central-1.amazonaws.com/salarium-poc-lumen-php-fpm:latest",
+                "cpu": 0,
+                "portMappings": [{
+                    "protocol": "tcp",
+                    "containerPort": 9000,
+                    "hostPort": 9000
+                }],
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {
+                        "awslogs-region": "eu-central-1",
+                        "awslogs-stream-prefix": "ecs",
+                        "awslogs-group": "/ecs/salarium-poc-web-nginx-phpfpm"
+                    }
+                },
+                "essential": true,
+                "volumesFrom": []
+            }
+        ],
+        "revision": 8
+    }
+}
