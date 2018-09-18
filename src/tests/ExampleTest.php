@@ -15,7 +15,7 @@ class ExampleTest extends TestCase
         $this->get('/');
 
         $expected = [
-            'status' => 'OK',
+            'status' => 'OK - modified',
             'version' => $this->app->version()
         ];
 

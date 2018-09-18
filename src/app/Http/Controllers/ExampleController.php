@@ -51,7 +51,7 @@ class ExampleController extends Controller
      */
     public function index() {
         return response()->json([
-            'status' => 'OK',
+            'status' => 'OK - modified',
             'version' => app()->version()
         ]);
     }
